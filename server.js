@@ -4,11 +4,12 @@ const { join } = require ('path')
 const app = express()
 
 app.use(express.static(join(__dirname, 'public')))
-app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
-app.engine('.hbs', require('express-handlebars')({ extname: '.hbs'}))
-app.set('view engie', '.hbs')
+app.set('view engie', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
+
 
 require('./routes')(app)
 
